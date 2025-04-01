@@ -1,0 +1,16 @@
+services:
+  web:
+    image: python:3.12-slim
+    command: python -m http.server 3000
+    volumes:
+      - ./src:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - "3000:3000"
+
+  test:
+    build: .
+    depends_on:
+      - web
+    environment:
+      - TARGET_URL=http://web:3000

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>Hello World</h1>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    if (name) {
+        document.querySelector('h1').textContent = `Hello ${name}`;
+    }
+</script>
+</body>
+</html>
