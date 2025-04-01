@@ -8,4 +8,4 @@ http://localhost:3000?name=whatever
 [https://github.com/robbrucker-rts/headless-tests/actions](https://github.com/robbrucker-rts/headless-tests/actions)
 
 ### More info
-View github workflow yaml in .github/workflows/tests.yml
+View Github workflow yaml in .github/workflows/tests.yml
