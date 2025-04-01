@@ -7,7 +7,7 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install && npm ci
 COPY . .
 
 CMD ["npm", "test"]
