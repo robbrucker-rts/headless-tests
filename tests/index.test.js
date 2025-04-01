@@ -41,4 +41,10 @@ describe('Hello World Page Tests', () => {
         const text = await page.$eval('h1', el => el.textContent);
         expect(text).toBe('Hello rob Bruck');
     });
+
+    test('Have a failure', async () => {
+        await page.goto(`${targetUrl}?firstName=rob&lastName=Bruck`);
+        const text = await page.$eval('h1', el => el.textContent);
+        expect(text).toBe('Hello World');
+    });
 });
