@@ -24,9 +24,28 @@ describe('Hello World Page Tests', () => {
         expect(text).toBe('Hello World');
     });
 
-    test('Custom name shows in greeting', async () => {
-        await page.goto(`${targetUrl}?name=Rob`);
+    test('Custom name shows in first name', async () => {
+        await page.goto(`${targetUrl}?firstName=Rob`);
         const text = await page.$eval('h1', el => el.textContent);
         expect(text).toBe('Hello Rob');
     });
+
+    test('Custom name shows in last name', async () => {
+        await page.goto(`${targetUrl}?lastName=Bruck`);
+        const text = await page.$eval('h1', el => el.textContent);
+        expect(text).toBe('Hello World Bruck');
+    });
+
+    test('Custom name shows in first and last name', async () => {
+        await page.goto(`${targetUrl}?firstName=rob&lastName=Bruck`);
+        const text = await page.$eval('h1', el => el.textContent);
+        expect(text).toBe('Hello rob Bruck');
+    });
+
+    test('Expected failure', async () => {
+        await page.goto(`${targetUrl}?firstName=rob&lastName=Bruck`);
+        const text = await page.$eval('h1', el => el.textContent);
+        expect(text).toBe('Hello World');
+    });
+
 });
