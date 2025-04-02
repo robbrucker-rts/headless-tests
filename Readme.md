@@ -1,8 +1,8 @@
 ### Build: 
-docker compose up --build
+`docker compose up --build`
 
 ### Go to: 
-http://localhost:3000?firstName=rob&lastName=bruck
+[http://localhost:3000?firstName=rob&lastName=bruck](http://localhost:3000?firstName=rob&lastName=bruck)
 
 ### View results in Github: 
 [https://github.com/robbrucker-rts/headless-tests/actions](https://github.com/robbrucker-rts/headless-tests/actions)
@@ -20,5 +20,6 @@ The yaml file contains the following:
 
   - The workflow runs the tests in headless mode
 
-- A rule was configured in repo settings to run the tests on every push to the main branch as well as PR's against main
-
+This repository uses GitHub Actions to automatically run tests when:
+- Code is pushed to the `main` branch
+- Pull requests are created against `main`
