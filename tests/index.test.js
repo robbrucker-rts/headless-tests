@@ -4,6 +4,7 @@ describe('Hello World Page Tests', () => {
     let browser;
     let page;
     const targetUrl = process.env.TARGET_URL || 'http://localhost:3000';
+    const TIMEOUT = 10000;
 
     beforeAll(async () => {
         browser = await puppeteer.launch({
@@ -18,28 +19,44 @@ describe('Hello World Page Tests', () => {
         await browser.close();
     });
 
-    test('Default greeting shows Hello World', async () => {
-        await page.goto(targetUrl);
-        const text = await page.$eval('h1', el => el.textContent);
+    beforeEach(async () => {
+        page = await browser.newPage();
+    });
+
+    afterEach(async () => {
+        await page.close();
+    });
+
+    async function getGreetingText() {
+        try {
+            return await page.$eval('h1', el => el.textContent);
+        } catch (error) {
+            throw new Error(`Failed to get greeting text: ${error.message}`);
+        }
+    }
+
+    test('should display default greeting without query parameters', async () => {
+        await page.goto(targetUrl, { timeout: TIMEOUT });
+        const text = await getGreetingText();
         expect(text).toBe('Hello World');
-    });
+    }, TIMEOUT);
 
-    test('Custom name shows in first name', async () => {
-        await page.goto(`${targetUrl}?firstName=Rob`);
-        const text = await page.$eval('h1', el => el.textContent);
+    test('should display first name when firstName parameter is provided', async () => {
+        await page.goto(`${targetUrl}?firstName=Rob`, { timeout: TIMEOUT });
+        const text = await getGreetingText();
         expect(text).toBe('Hello Rob');
-    });
+    }, TIMEOUT);
 
-    test('Custom name shows in last name', async () => {
-        await page.goto(`${targetUrl}?lastName=Bruck`);
-        const text = await page.$eval('h1', el => el.textContent);
+    test('should append last name when lastName parameter is provided', async () => {
+        await page.goto(`${targetUrl}?lastName=Bruck`, { timeout: TIMEOUT });
+        const text = await getGreetingText();
         expect(text).toBe('Hello World Bruck');
-    });
+    }, TIMEOUT);
 
-    test('Custom name shows in first and last name', async () => {
-        await page.goto(`${targetUrl}?firstName=rob&lastName=Bruck`);
-        const text = await page.$eval('h1', el => el.textContent);
+    test('should display full name when both parameters are provided', async () => {
+        await page.goto(`${targetUrl}?firstName=rob&lastName=Bruck`, { timeout: TIMEOUT });
+        const text = await getGreetingText();
         expect(text).toBe('Hello rob Bruck');
-    });
+    }, TIMEOUT);
 
 });
