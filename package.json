@@ -1,17 +1,10 @@
 {
-  "name": "puppeteer",
+  "name": "puppeteer-headless-tests",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "test": "jest --forceExit",
-    "test:watch": "jest --watchAll --forceExit",
-    "docker:test": "docker run --rm -v \"$(pwd):/app\" -v /app/node_modules puppeteer-tests",
-    "docker:build": "docker build -t puppeteer-tests ."
+    "test:watch": "jest --watchAll --forceExit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "broken-link-checker": "^0.7.8",
     "puppeteer": "^24.4.0"
