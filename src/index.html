@@ -4,13 +4,13 @@
 <h1>Hello World</h1>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
-
     const firstName = urlParams.get('firstName');
+    const lastName = urlParams.get('lastName');
+
     if (firstName) {
         document.querySelector('h1').textContent = `Hello ${firstName}`;
     }
 
-    const lastName = urlParams.get('lastName');
     if (lastName) {
         document.querySelector('h1').textContent += ` ${lastName}`;
     }
